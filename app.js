@@ -37,7 +37,7 @@ store.on("error", ()=>{
 })
 
 const sessionOptions = {
-    store,
+    // store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
@@ -59,6 +59,7 @@ app.engine("ejs", ejsMate);
 
 async function main() {
     await mongoose.connect(dbUrl);
+    // await mongoose.connect(MONGO_URL);
 }
 
 main()
@@ -74,9 +75,10 @@ app.listen(port, () => {
 });
 
 // Root Route 
-// app.get("/", (req, res) => {
-//     res.send("Hello, I am root");
-// });
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 
 
 app.use(session(sessionOptions));
